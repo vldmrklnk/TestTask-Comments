@@ -1,0 +1,15 @@
+D:\programming\Elinext\Elinext.TestTask.Comments\Elinext.TestTask.Comments.DAL\bin\Debug\net5.0\Elinext.TestTask.Comments.DAL.deps.json
+D:\programming\Elinext\Elinext.TestTask.Comments\Elinext.TestTask.Comments.DAL\bin\Debug\net5.0\Elinext.TestTask.Comments.DAL.runtimeconfig.json
+D:\programming\Elinext\Elinext.TestTask.Comments\Elinext.TestTask.Comments.DAL\bin\Debug\net5.0\Elinext.TestTask.Comments.DAL.runtimeconfig.dev.json
+D:\programming\Elinext\Elinext.TestTask.Comments\Elinext.TestTask.Comments.DAL\bin\Debug\net5.0\Elinext.TestTask.Comments.DAL.dll
+D:\programming\Elinext\Elinext.TestTask.Comments\Elinext.TestTask.Comments.DAL\bin\Debug\net5.0\ref\Elinext.TestTask.Comments.DAL.dll
+D:\programming\Elinext\Elinext.TestTask.Comments\Elinext.TestTask.Comments.DAL\bin\Debug\net5.0\Elinext.TestTask.Comments.DAL.pdb
+D:\programming\Elinext\Elinext.TestTask.Comments\Elinext.TestTask.Comments.DAL\obj\Debug\net5.0\Elinext.TestTask.Comments.DAL.csprojAssemblyReference.cache
+D:\programming\Elinext\Elinext.TestTask.Comments\Elinext.TestTask.Comments.DAL\obj\Debug\net5.0\Elinext.TestTask.Comments.DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\programming\Elinext\Elinext.TestTask.Comments\Elinext.TestTask.Comments.DAL\obj\Debug\net5.0\Elinext.TestTask.Comments.DAL.AssemblyInfoInputs.cache
+D:\programming\Elinext\Elinext.TestTask.Comments\Elinext.TestTask.Comments.DAL\obj\Debug\net5.0\Elinext.TestTask.Comments.DAL.AssemblyInfo.cs
+D:\programming\Elinext\Elinext.TestTask.Comments\Elinext.TestTask.Comments.DAL\obj\Debug\net5.0\Elinext.TestTask.Comments.DAL.csproj.CoreCompileInputs.cache
+D:\programming\Elinext\Elinext.TestTask.Comments\Elinext.TestTask.Comments.DAL\obj\Debug\net5.0\Elinext.TestTask.Comments.DAL.dll
+D:\programming\Elinext\Elinext.TestTask.Comments\Elinext.TestTask.Comments.DAL\obj\Debug\net5.0\ref\Elinext.TestTask.Comments.DAL.dll
+D:\programming\Elinext\Elinext.TestTask.Comments\Elinext.TestTask.Comments.DAL\obj\Debug\net5.0\Elinext.TestTask.Comments.DAL.pdb
+D:\programming\Elinext\Elinext.TestTask.Comments\Elinext.TestTask.Comments.DAL\obj\Debug\net5.0\Elinext.TestTask.Comments.DAL.genruntimeconfig.cache
