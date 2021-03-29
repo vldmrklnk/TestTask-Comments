@@ -13,12 +13,14 @@ namespace Elinext.TestTask.Comments.Controllers
 		private readonly IArticleViewModelProvider articleViewModelProvider;
 		private readonly ICommentCreatorService commentCreatorService;
 		private readonly ICommentViewModelProvider comment;
+		private readonly IReplyCommentViewModelProvider replyComment;
 		public ArticleController(IArticleViewModelProvider articleViewModelProvider, ICommentCreatorService commentCreatorService,
-									ICommentViewModelProvider comment)
+									ICommentViewModelProvider comment, IReplyCommentViewModelProvider replyComment)
 		{
 			this.articleViewModelProvider = articleViewModelProvider;
 			this.commentCreatorService = commentCreatorService;
 			this.comment = comment;
+			this.replyComment = replyComment;
 		}
 		[HttpGet]
 		[Route("article/{id:int}")]
@@ -26,7 +28,9 @@ namespace Elinext.TestTask.Comments.Controllers
 		
 		{
 			ViewBag.PageModel = new PageModel(){ article = articleViewModelProvider.GetById(id),
-												comments = comment.GetAll()};
+												comments = comment.GetAll(),
+													replyComments=replyComment.GetAll()
+			};
 			return View();
 		}
 
@@ -36,7 +40,9 @@ namespace Elinext.TestTask.Comments.Controllers
 		{
 			pageModel.article = articleViewModelProvider.GetById(id);
 			commentCreatorService.CreatComment(pageModel);
+			replyComment.InsertNew(pageModel.reply);
 			return RedirectToAction("Article");
 		}
+
 	}
 }

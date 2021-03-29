@@ -9,6 +9,8 @@ namespace Elinext.TestTask.Comments.ViewModels
 	{
 		public CommentViewModel comment { get; set; }
 		public ArticleViewModel article { get; set; }
+		public ReplyCommentViewModel reply { get; set; }
 		public List<CommentViewModel> comments { get; set; }
+		public List<ReplyCommentViewModel> replyComments { get; set; }
 	}
 }

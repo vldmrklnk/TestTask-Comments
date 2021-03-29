@@ -1,68 +1,91 @@
 ﻿@using Elinext.TestTask.Comments.ViewModels
 @model PageModel;
-	<script src="~/lib/jquery/dist/jquery.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function () {
-			$(document).on("click", "#add_comment", function () {
-				let form = $("form[name='form']");
-				form.css("display", "block");
-				$("#add_comment").replaceWith(form);
-			});
-			$(document).on("click", "input[name='send']", function () {
-				let comment = $("textarea[name='comment1']").val();
-				$("<p>" + comment + "<p/>".appendTo("comments"));
-			});
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$(document).on("click", "#add_comment", function () {
+			let form = $("form[name='form']");
+			form.css("display", "block");
+			$("#add_comment").replaceWith(form);
 		});
-	</script>
-	<article>
-		<form method="get" asp-controller="article" asp-action="article">
-			<span>@ViewBag.PageModel.article.Theme</span>
-			<div>@ViewBag.PageModel.article.ArticleContent</div>
-		</form>
-		<form method="post" asp-controller="article" asp-action="article">
-			<table>
-				<tr>
-					<td>Username</td>
-					<td>@Html.EditorFor(model => model.comment.UserName)</td>
-				</tr>
-				<tr>
-					<td>Write comment</td>
-					<td>@Html.EditorFor(model => model.comment.CommentContent)</td>
-				</tr>
-				<tr>
-					<td><input type="submit" value="Send" /> </td>
-					<td></td>
-				</tr>
-			</table>
-		</form>
+		$(document).on("click", "input[name='send']", function () {
+			@Html.ValueFor(model => model.reply.ReplyContent) = $("textarea[name='comment']").val();
+		});
+	});
+</script>
+<article>
+	<form method="get" asp-controller="article" asp-action="article">
+		<span>@ViewBag.PageModel.article.Theme</span>
+		<div>@ViewBag.PageModel.article.ArticleContent</div>
+	</form>
+	<form method="post" asp-controller="article" asp-action="article">
+		<table>
+			<tr>
+				<td>Username</td>
+				<td>@Html.EditorFor(model => model.comment.UserName)</td>
+			</tr>
+			<tr>
+				<td>Write comment</td>
+				<td>@Html.EditorFor(model => model.comment.CommentContent)</td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="Send" /> </td>
+				<td></td>
+			</tr>
+		</table>
+	</form>
 
-		@foreach (var comment in @ViewBag.PageModel.comments)
-		{
-			<form method="get" asp-controller="article" asp-action="article">
-				<div class="comments-wrapper">
-					<ul class="comments-list">
-						<li itemprop="comment" itemscope class="comment" id="comment-1">
-							<div class="comment-content">
-								<div class="comment-head">
-									<div class="comment-author">
-										<span itemprop="author" itemscope>@comment.UserName</span>
-									</div>
-									<div itemprop="dateCreated" class="comment-createdon">
-										@comment.Date
-									</div>
+	@foreach (var comment in @ViewBag.PageModel.comments)
+	{
+		<form method="get" asp-controller="article" asp-action="article">
+			<div class="comments-wrapper">
+				<ul class="comments-list">
+					<li itemprop="comment" itemscope class="comment" id="comment-1">
+						<div class="comment-content">
+							<div class="comment-head">
+								<div class="comment-author">
+									<span itemprop="author" itemscope>@comment.UserName</span>
+								</div>
+								<div itemprop="dateCreated" class="comment-createdon">
+									@comment.Date
 								</div>
 							</div>
-							<div itemprop="text" class="comment-text">
-								<span>@comment.CommentContent</span>
-							</div>
-							<input type="submit" onclick="return false" value="Reply" id="add_comment" href="#">
-						</li>
-					</ul>
-				</div>
-			</form>
-		}
-			<form name="form" id="form" action="#" method="post" style="display:none" onsubmit="return false">
-				<label for="textarea"><textarea id="textarea" name="comment1" cols="30" rows="10"></textarea></label>
-				<input type="submit" name="send" value="Add Comment" id="done">
-			</form>
-	</article>
+						</div>
+						<div itemprop="text" class="comment-text">
+							<span>@comment.CommentContent</span>
+						</div>
+						<input type="submit" onclick="return false" value="Reply" id="add_comment" href="#">
+						@foreach (var replyComment in @ViewBag.PageModel.replyComments)
+						{
+							@if (replyComment.MainCommentId == comment.Id)
+							{
+								<div class="reply-comments-wrapper">
+									<ul class="reply-comments-list">
+										<li itemprop="reply-comment" itemscope class="reply-comment" id="reply-comment-1">
+											<div class="reply-comment-content">
+												<div class="reply-comment-head">
+													<div class="reply-comment-author">
+														<span itemprop="author-of-reply" itemscope>@replyComment.UserName</span>
+													</div>
+												</div>
+											</div>
+											<div itemprop="text" class="reply-comment-text">
+												<span>@replyComment.ReplyContent</span>
+											</div>
+											<input type="submit" onclick="return false" value="Reply" id="add_comment" href="#">
+										</li>
+									</ul>
+								</div>
+							}
+						}
+					</li>
+				</ul>
+			</div>
+
+		</form>
+	}
+	<form name="form" id="form" action="#" method="post" style="display:none" onsubmit="return false">
+		@Html.TextAreaFor(model => model.reply.ReplyContent)
+		<input type="submit" name="send" value="Add Comment" id="done">
+	</form>
+</article>

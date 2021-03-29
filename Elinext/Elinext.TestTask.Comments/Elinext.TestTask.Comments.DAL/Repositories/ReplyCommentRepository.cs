@@ -28,6 +28,7 @@ namespace Elinext.TestTask.Comments.DAL.Repositories
 				replyComment.MainCommentId = comment.MainCommentId;
 				replyComment.ReplyContent = comment.ReplyContent;
 				replyComment.Id = comment.Id;
+				replyComment.UserName = comment.UserName;
 				replyComments.Add(replyComment);
 			}
 			return replyComments;
