@@ -9,7 +9,7 @@
 			$("#add_comment").replaceWith(form);
 		});
 		$(document).on("click", "input[name='send']", function () {
-			@Html.ValueFor(model => model.reply.ReplyContent) = $("textarea[name='comment']").val();
+			let x=@ViewBag.PageModel.comment.Id;
 		});
 	});
 </script>
@@ -54,7 +54,7 @@
 						<div itemprop="text" class="comment-text">
 							<span>@comment.CommentContent</span>
 						</div>
-						<input type="submit" onclick="return false" value="Reply" id="add_comment" href="#">
+						<input type="submit" value="Reply" id="add_comment" >
 						@foreach (var replyComment in @ViewBag.PageModel.replyComments)
 						{
 							@if (replyComment.MainCommentId == comment.Id)
@@ -72,7 +72,7 @@
 											<div itemprop="text" class="reply-comment-text">
 												<span>@replyComment.ReplyContent</span>
 											</div>
-											<input type="submit" onclick="return false" value="Reply" id="add_comment" href="#">
+											<input type="submit" value="Reply" id="add_comment">
 										</li>
 									</ul>
 								</div>
@@ -84,8 +84,16 @@
 
 		</form>
 	}
-	<form name="form" id="form" action="#" method="post" style="display:none" onsubmit="return false">
-		@Html.TextAreaFor(model => model.reply.ReplyContent)
-		<input type="submit" name="send" value="Add Comment" id="done">
+	<form name="form" id="form" asp-controller="article" asp-action="article" method="post" style="display:none">
+		<table>
+			<tr>
+				<td>Username</td>
+				<td>@Html.EditorFor(model => model.reply.UserName)</td>
+			</tr>
+			<tr>
+				<td>@Html.TextAreaFor(model => model.reply.ReplyContent)</td>
+				<td><input type="submit" name="send" value="Add Comment" id="done">	</td>
+			<tr>
+		</table>
 	</form>
 </article>

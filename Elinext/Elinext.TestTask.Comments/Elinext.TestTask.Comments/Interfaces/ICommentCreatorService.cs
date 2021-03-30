@@ -10,5 +10,6 @@ namespace Elinext.TestTask.Comments.Interfaces
 	public interface ICommentCreatorService
 	{
 		public void CreatComment(PageModel pageModel);
+		public void CreateReply(ReplyCommentViewModel reply);
 	}
 }

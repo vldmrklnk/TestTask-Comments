@@ -36,11 +36,19 @@ namespace Elinext.TestTask.Comments.Controllers
 
 		[HttpPost]
 		[Route("article/{id:int}")]
-		public IActionResult Article(PageModel pageModel,[FromRoute]int id)
+		public IActionResult Article(PageModel pageModel, [FromRoute]int id)
 		{
+
+			if (pageModel.reply==null)
+			{ 
 			pageModel.article = articleViewModelProvider.GetById(id);
 			commentCreatorService.CreatComment(pageModel);
-			replyComment.InsertNew(pageModel.reply);
+			}
+			else
+			{
+				pageModel.reply.MainCommentId = pageModel.comment.Id;
+				commentCreatorService.CreateReply(pageModel.reply);
+			}
 			return RedirectToAction("Article");
 		}
 
