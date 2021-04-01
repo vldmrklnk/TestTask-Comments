@@ -10,7 +10,6 @@ namespace Elinext.TestTask.Comments.DAL.Interfaces
 	{
 		IRepository<Article> ArticleRepository { get; }
 		IRepository<Comment> CommentRepository { get;  }
-		IRepository<ReplyComment> ReplyCommentRepository { get;}
 		void SaveChanges();
 	}
 }

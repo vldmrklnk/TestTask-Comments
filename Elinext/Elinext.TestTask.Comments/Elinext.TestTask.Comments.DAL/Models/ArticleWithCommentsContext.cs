@@ -19,7 +19,6 @@ namespace Elinext.TestTask.Comments.DAL
 
         public virtual DbSet<Article> Articles { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
-        public virtual DbSet<ReplyComment> ReplyComments { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -51,19 +50,11 @@ namespace Elinext.TestTask.Comments.DAL
                     .HasForeignKey(d => d.ArticleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Comments_Articles");
-            });
 
-            modelBuilder.Entity<ReplyComment>(entity =>
-            {
-                entity.Property(e => e.ReplyContent).IsRequired();
-
-                entity.Property(e => e.UserName).IsRequired();
-
-                entity.HasOne(d => d.MainComment)
-                    .WithMany(p => p.ReplyComments)
-                    .HasForeignKey(d => d.MainCommentId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ReplyComments_Comments");
+                entity.HasOne(d => d.ParentComment)
+                    .WithMany(p => p.InverseParentComment)
+                    .HasForeignKey(d => d.ParentCommentId)
+                    .HasConstraintName("FK_Comments_Comments");
             });
 
             OnModelCreatingPartial(modelBuilder);

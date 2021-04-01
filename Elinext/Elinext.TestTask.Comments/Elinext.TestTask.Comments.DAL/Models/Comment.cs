@@ -9,7 +9,7 @@ namespace Elinext.TestTask.Comments.DAL
     {
         public Comment()
         {
-            ReplyComments = new HashSet<ReplyComment>();
+            InverseParentComment = new HashSet<Comment>();
         }
 
         public long Id { get; set; }
@@ -17,8 +17,10 @@ namespace Elinext.TestTask.Comments.DAL
         public long ArticleId { get; set; }
         public DateTime Date { get; set; }
         public string UserName { get; set; }
+        public long? ParentCommentId { get; set; }
 
         public virtual Article Article { get; set; }
-        public virtual ICollection<ReplyComment> ReplyComments { get; set; }
+        public virtual Comment ParentComment { get; set; }
+        public virtual ICollection<Comment> InverseParentComment { get; set; }
     }
 }

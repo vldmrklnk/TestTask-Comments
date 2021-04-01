@@ -4,7 +4,8 @@ CREATE DATABASE [ArticleWithComments];
 GO
 USE [ArticleWithComments]
 GO
-/****** Object:  Table [dbo].[Articles]    Script Date: 2021-03-25 17:12:26 ******/
+
+/****** Object:  Table [dbo].[Articles]    Script Date: 2021-04-01 22:55:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -19,7 +20,7 @@ CREATE TABLE [dbo].[Articles](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Comments]    Script Date: 2021-03-25 17:12:26 ******/
+/****** Object:  Table [dbo].[Comments]    Script Date: 2021-04-01 22:55:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -30,23 +31,8 @@ CREATE TABLE [dbo].[Comments](
 	[ArticleId] [bigint] NOT NULL,
 	[Date] [datetime] NOT NULL,
 	[UserName] [nvarchar](max) NOT NULL,
+	[ParentCommentId] [bigint] NULL,
  CONSTRAINT [PK_Comments] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[ReplyComments]    Script Date: 2021-03-25 17:12:26 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[ReplyComments](
-	[MainCommentId] [bigint] NOT NULL,
-	[ReplyContent] [nvarchar](max) NOT NULL,
-	[Id] [bigint] IDENTITY(1,1) NOT NULL,
-	[UserName] [nvarchar](max) NOT NULL,
- CONSTRAINT [PK_ReplyComments] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
@@ -62,8 +48,8 @@ REFERENCES [dbo].[Articles] ([Id])
 GO
 ALTER TABLE [dbo].[Comments] CHECK CONSTRAINT [FK_Comments_Articles]
 GO
-ALTER TABLE [dbo].[ReplyComments]  WITH CHECK ADD  CONSTRAINT [FK_ReplyComments_Comments] FOREIGN KEY([MainCommentId])
+ALTER TABLE [dbo].[Comments]  WITH CHECK ADD  CONSTRAINT [FK_Comments_Comments] FOREIGN KEY([ParentCommentId])
 REFERENCES [dbo].[Comments] ([Id])
 GO
-ALTER TABLE [dbo].[ReplyComments] CHECK CONSTRAINT [FK_ReplyComments_Comments]
+ALTER TABLE [dbo].[Comments] CHECK CONSTRAINT [FK_Comments_Comments]
 GO

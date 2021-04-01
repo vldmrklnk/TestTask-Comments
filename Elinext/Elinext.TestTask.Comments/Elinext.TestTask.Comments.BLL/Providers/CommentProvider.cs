@@ -28,6 +28,7 @@ namespace Elinext.TestTask.Comments.BLL.Providers
 				newComment.ArticleId = comment.ArticleId;
 				newComment.Date = comment.Date;
 				newComment.UserName = comment.UserName;
+				newComment.ParentCommentId = comment.ParentCommentId;
 				comments.Add(newComment);
 			}
 			return comments;
@@ -39,7 +40,8 @@ namespace Elinext.TestTask.Comments.BLL.Providers
 				ArticleId = entity.ArticleId,
 				CommentContent = entity.CommentContent,
 				Date = entity.Date,
-				UserName = entity.UserName
+				UserName = entity.UserName,
+				ParentCommentId = entity.ParentCommentId
 			});
 		}
 	}

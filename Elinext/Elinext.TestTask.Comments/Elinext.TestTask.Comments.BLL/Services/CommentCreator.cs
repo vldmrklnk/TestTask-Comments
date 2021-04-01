@@ -9,24 +9,17 @@ namespace Elinext.TestTask.Comments.BLL.Services
 	public class CommentCreator : ICommentCreator
 	{
 		private readonly ICommentProvider commentProvider;
-		private readonly IReplyCommentProvider reply;
 		private readonly IUnitOfWork unityOfWork;
-		public CommentCreator(ICommentProvider commentProvider, IUnitOfWork unityOfWork, IReplyCommentProvider reply)
+		public CommentCreator(ICommentProvider commentProvider, IUnitOfWork unityOfWork)
 		{
 			this.commentProvider = commentProvider;
 			this.unityOfWork = unityOfWork;
-			this.reply = reply;
 		}
 		public void CreatComment(CommentDTO comment, ArticleDTO article)
 		{
 			comment.ArticleId = article.Id;;
 			comment.Date = DateTime.Now;
 			commentProvider.InsertNew(comment);
-			unityOfWork.SaveChanges();
-		}
-		public void CreateReply(ReplyCommentDTO replyComment)
-		{
-			reply.InsertNew(replyComment);
 			unityOfWork.SaveChanges();
 		}
 	}

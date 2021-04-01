@@ -13,23 +13,22 @@ namespace Elinext.TestTask.Comments.Controllers
 		private readonly IArticleViewModelProvider articleViewModelProvider;
 		private readonly ICommentCreatorService commentCreatorService;
 		private readonly ICommentViewModelProvider comment;
-		private readonly IReplyCommentViewModelProvider replyComment;
 		public ArticleController(IArticleViewModelProvider articleViewModelProvider, ICommentCreatorService commentCreatorService,
-									ICommentViewModelProvider comment, IReplyCommentViewModelProvider replyComment)
+									ICommentViewModelProvider comment)
 		{
 			this.articleViewModelProvider = articleViewModelProvider;
 			this.commentCreatorService = commentCreatorService;
 			this.comment = comment;
-			this.replyComment = replyComment;
 		}
 		[HttpGet]
 		[Route("article/{id:int}")]
 		public IActionResult Article(int id)
 		
 		{
+			CommentViewModel commenta = new CommentViewModel();
 			ViewBag.PageModel = new PageModel(){ article = articleViewModelProvider.GetById(id),
-												comments = comment.GetAll(),
-													replyComments=replyComment.GetAll()
+												comments = comment.GetAll().Where(x => x.ParentCommentId == null).ToList(),
+												replyComments=comment.GetAll().Where(x=>x.ParentCommentId != null).ToList()
 			};
 			return View();
 		}
@@ -38,17 +37,9 @@ namespace Elinext.TestTask.Comments.Controllers
 		[Route("article/{id:int}")]
 		public IActionResult Article(PageModel pageModel, [FromRoute]int id)
 		{
-
-			if (pageModel.reply==null)
-			{ 
 			pageModel.article = articleViewModelProvider.GetById(id);
 			commentCreatorService.CreatComment(pageModel);
-			}
-			else
-			{
-				pageModel.reply.MainCommentId = pageModel.comment.Id;
-				commentCreatorService.CreateReply(pageModel.reply);
-			}
+
 			return RedirectToAction("Article");
 		}
 

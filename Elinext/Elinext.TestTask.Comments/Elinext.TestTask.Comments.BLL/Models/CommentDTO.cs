@@ -13,5 +13,6 @@ namespace Elinext.TestTask.Comments.BLL.Models
         public long ArticleId { get; set; }
         public DateTime Date { get; set; }
         public string UserName { get; set; }
+        public long? ParentCommentId { get; set; }
     }
 }

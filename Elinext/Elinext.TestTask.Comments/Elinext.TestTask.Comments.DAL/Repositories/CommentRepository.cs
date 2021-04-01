@@ -23,13 +23,14 @@ namespace Elinext.TestTask.Comments.DAL.Repositories
 		{
 			List<Comment> comments = new List<Comment>();
 			foreach (var comment in context.Comments)
-			{
+			 {
 				var newComment = new Comment();
 				newComment.Id = comment.Id;
 				newComment.CommentContent = comment.CommentContent;
 				newComment.ArticleId = comment.ArticleId;
 				newComment.Date = comment.Date;
 				newComment.UserName = comment.UserName;
+				newComment.ParentCommentId = comment.ParentCommentId;
 				comments.Add(newComment);
 			}
 			return comments;
@@ -43,7 +44,8 @@ namespace Elinext.TestTask.Comments.DAL.Repositories
 				CommentContent = context.Comments.FirstOrDefault(x => x.Id == id).CommentContent,
 				ArticleId = context.Comments.FirstOrDefault(x => x.Id == id).ArticleId,
 				Date= context.Comments.FirstOrDefault(x => x.Id == id).Date,
-				UserName = context.Comments.FirstOrDefault(x => x.Id == id).UserName
+				UserName = context.Comments.FirstOrDefault(x => x.Id == id).UserName,
+				ParentCommentId = context.Comments.FirstOrDefault(x => x.Id == id).ParentCommentId
 			};
 			return comment;
 		}

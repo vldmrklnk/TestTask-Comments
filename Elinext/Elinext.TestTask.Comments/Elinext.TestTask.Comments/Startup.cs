@@ -38,13 +38,10 @@ namespace Elinext.TestTask.Comments
 			services.AddTransient<IUnitOfWork, UnitOfWork>();
 			services.AddTransient<IRepository<Article>, ArticleRepository>();
 			services.AddTransient<IRepository<Comment>, CommentRepository>();
-			services.AddTransient<IRepository<ReplyComment>, ReplyCommentRepository>();
 			services.AddTransient<IArticleProvider, ArticleProvider>();
 			services.AddTransient<ICommentProvider, CommentProvider>();
-			services.AddTransient<IReplyCommentProvider, ReplyCommentProvider>();
 			services.AddTransient<IArticleViewModelProvider, ArticleViewModelProvider>();
 			services.AddTransient<ICommentViewModelProvider, CommentViewModelProvider>();
-			services.AddTransient<IReplyCommentViewModelProvider, ReplyCommentViewModelprovider>();
 			services.AddTransient<ICommentCreatorService, CommentCreatorService>();
 			services.AddTransient<ICommentCreator, CommentCreator>();
 		}

@@ -30,17 +30,10 @@ namespace Elinext.TestTask.Comments.DAL.UnitOfWork
 				return new CommentRepository(context);
 			}
 		}
-
-		public IRepository<ReplyComment> ReplyCommentRepository
-		{
-			get
-			{
-				return new ReplyCommentRepository(context);
-			}
-		}
 		public void SaveChanges()
 		{
 			context.SaveChanges();
 		}
 	}
 }
+
